@@ -13,35 +13,32 @@ import MyPage
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        
+
         let tabBarController = MainTabbarController()
-        tabBarController.tabBar.tintColor = .systemBlue
-        tabBarController.tabBar.isTranslucent = false
-        
-        let homeVC = HomeViewController.create() ?? UIViewController()
+
+        let homeVC = HomeViewController()
         homeVC.tabBarItem = .init(tabBarSystemItem: UITabBarItem.SystemItem.favorites, tag: 0)
-        
+
         let mypageVC = MyPageViewController()
-        mypageVC.tabBarItem = UITabBarItem(title: "MyPage", image: CommonUIAsset.mypageIcon.image, tag: 1)
+        mypageVC.tabBarItem = .init(tabBarSystemItem: .more, tag: 1)
+        tabBarController.viewControllers = [homeVC, mypageVC]
         
-        tabBarController.setViewControllers([homeVC, mypageVC], animated: false)
-        
-        
-        let viewController = ViewController()
-        window?.rootViewController = viewController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         return true
     }
-    
+
 }
 
 class MainTabbarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.tabBar.backgroundColor = .white
+        self.tabBar.tintColor = .systemBlue
+        self.tabBar.isTranslucent = false
     }
 }
