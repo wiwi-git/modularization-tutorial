@@ -10,7 +10,7 @@ import UIKit
 import Home
 import MyPage
 
-@main
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
